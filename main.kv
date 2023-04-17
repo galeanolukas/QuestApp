@@ -1,0 +1,705 @@
+WindowManager:
+    VentanaInicio:
+    VentanaAdmin:
+    VentanaPregunta1:
+    VentanaPregunta2:
+    VentanaPregunta3:
+    VentanaPregunta4:
+    VentanaFinal:
+    VentanaFinalAdmin:
+    VentanaAdminConfig:
+
+<RoundedButton@Button>
+	background_color: (0,0,0,0)
+	background_normal: ''
+    border: (10,10,10,10)
+    size_hint:(1, 0.5)
+    font_size:25
+    bold:True
+	canvas.before:
+		Color:
+			rgba: (48/255,84/255,150/255,1)
+		RoundedRectangle:
+			size: self.size
+			pos: self.pos
+			radius: [45]
+
+<CustLabel@Label>:
+    color: 1, 1, 1, 1
+    font_size:35
+    size_hint_y: None
+    size_hint_x: 0.5
+    text_size: self.width, None
+    height: self.texture_size[1]
+
+<CheckBoxBG@CheckBox>:
+    canvas.before:
+        Color:
+            rgb: 0,1,0
+        Rectangle:
+            pos:self.center_x-8, self.center_y-8
+            size:[22,22]
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            pos:self.center_x-7, self.center_y-7
+            size:[20,20]
+
+<VentanaInicio>:
+    name: "inicio"
+    entrada_login: entrada_login
+    debug: debug
+    mode: mode
+    boton_init: boton_init
+    set_title:'Encuesta INTA 2023'
+
+    GridLayout:
+        cols:1
+        size_hint:(0.8, 0.9)
+        pos_hint:{"center_x":0.5, "center_y":0.5}
+        spacing:10
+
+        Label:
+            id:mode
+            markup:True
+            text: ""
+            color:"#ff0000"
+            size_hint:(1, 0.5)
+            font_size:30
+
+        Label:
+            markup:True
+            text: "ENCUESTA 2023"
+            font_size:40
+            size_hint:(0.5, 0.5)
+            bold:True
+
+        Image:
+            source:"data/main-logo.png"
+
+        Label:
+            markup:True
+            text: "INGRESE NOMBRE O RENSPA"
+            font_size:30
+            color:"#0fffd4"
+
+        TextInput:
+            id: entrada_login
+            multiline: False
+            font_size:24
+            padding_y:(5, 5)
+            padding_x:(5, 5)
+            size_hint:(1, 0.5)
+            on_text: app.update_font_size(self)
+            on_size: app.update_font_size(self)
+
+        Label:
+            id:debug
+            text: ""
+            color:"#fffb00"
+            font_size:35
+
+        RoundedButton:
+            id:boton_init
+            text: "COMENZAR"
+            on_release:root.siguiente(app.root)
+
+
+<VentanaAdmin>:
+    name: "admin_login"
+    debug: debug
+    mode: mode
+    pass_login:pass_login
+    set_title:'ADMIN INTAAPP 2023'
+
+    GridLayout:
+        cols:1
+        size_hint:(0.8, 0.9)
+        pos_hint:{"center_x":0.5, "center_y":0.5}
+        spacing:10
+
+        Label:
+            id:mode
+            markup:True
+            text: ""
+            color:"#ff0000"
+            size_hint:(1, 0.5)
+            font_size:30
+
+        Label:
+            markup:True
+            text: "ACCESO A LOS DATOS"
+            font_size:40
+            size_hint:(1, 0.5)
+            bold:True
+
+        Image:
+            source:"data/icono-lock.png"
+
+        Label:
+            markup:True
+            text: "INGRESE CLAVE ADMIN"
+            font_size:30
+            color:"#0fffd4"
+
+        TextInput:
+            id: pass_login
+            multiline: False
+            font_size:24
+            padding_y:(5, 5)
+            padding_x:(5, 5)
+            size_hint:(1, 0.5)
+            on_text: app.update_font_size(self)
+            on_size: app.update_font_size(self)
+
+        Label:
+            id:debug
+            text: ""
+            color:"#fffb00"
+            font_size:35
+
+        RoundedButton:
+            id:boton_init
+            text: "INGRESAR"
+            size_hint:(1, 0.5)
+            font_size:25
+            bold:True
+            on_release:root.validar(app.root, root.pass_login.text)
+
+        RoundedButton:
+            text:"ATRAS"
+            size_hint:(1, 0.5)
+            font_size:25
+            bold:True
+            on_release:root.volver(app.root)
+
+<VentanaAdminConfig>:
+    name: "admin_config"
+    debug: debug
+    mode: mode
+    link_db:link_db
+    set_title:'CONFIG INTAAPP 2023'
+
+    GridLayout:
+        cols:1
+        size_hint:(0.8, 0.9)
+        pos_hint:{"center_x":0.5, "center_y":0.5}
+        spacing:10
+
+        Label:
+            id:mode
+            markup:True
+            text: ""
+            color:"#ff0000"
+            size_hint:(1, 0.5)
+            font_size:30
+
+        Label:
+            markup:True
+            text: "CAMBIAR FIREBASE REALTIMEDB"
+            font_size:40
+            size_hint:(1, 0.5)
+            bold:True
+
+        Image:
+            source:"data/db-icon.png"
+
+        Label:
+            markup:True
+            text: "INGRESE APPLINK FIREBASE"
+            font_size:30
+            color:"#0fffd4"
+
+        TextInput:
+            id: link_db
+            multiline: False
+            font_size:24
+            padding_y:(5, 5)
+            padding_x:(5, 5)
+            size_hint:(1, 0.5)
+            on_text: app.update_font_size(self)
+            on_size: app.update_font_size(self)
+
+        Label:
+            id:debug
+            text: ""
+            color:"#fffb00"
+            font_size:35
+
+        RoundedButton:
+            id:boton_init
+            text: "CAMBIAR"
+            size_hint:(1, 0.5)
+            font_size:25
+            bold:True
+            on_release:root.cambiar(app.root)
+
+        RoundedButton:
+            text:"ATRAS"
+            size_hint:(1, 0.5)
+            font_size:25
+            bold:True
+            on_release:root.volver(app.root)
+
+
+<VentanaPregunta1>:
+    name: "pregunta_uno"
+    debug: debug
+    mode: mode
+
+    GridLayout:
+        cols:1
+        size_hint:(0.8, 1)
+        pos_hint:{"center_x":0.5, "center_y":0.5}
+        spacing:10
+
+        BoxLayout:
+            orientation:"vertical"
+            padding:5
+            spacing:10
+
+            Label:
+                id:mode
+                text: ""
+                color:"#ff0000"
+                size_hint:(1, 0.5)
+                font_size:10
+
+            Label:
+                text: "QUESTIONARIO SR"
+                font_size:40
+                size_hint:(1, 0.5)
+                bold:True
+
+            Label:
+                text:"1) ¿Que infraestructura se ve afectada por eventos ambientales?"
+                font_size:30
+                size_hint_y: None
+                text_size: self.width, None
+                height: self.texture_size[1]
+                padding_x:5
+                padding_y:5
+
+            GridLayout:
+                cols:2
+                pos_hint:{"center_x":0.5, "center_y":0.5}
+                spacing:5
+
+                CustLabel:
+                    id:check1
+                    text: "Casa"
+                    bold:True
+
+                CheckBoxBG:
+                    on_active:root.get_checks(self, self.active, "Casa")
+
+                CustLabel:
+                    id:check2
+                    text: "Galpon"
+                    bold:True
+
+                CheckBoxBG:
+                    on_active:root.get_checks(self, self.active, "Galpon")
+
+                CustLabel:
+                    id:check3
+                    text: "Corrales"
+                    bold:True
+
+                CheckBoxBG:
+                    on_active:root.get_checks(self, self.active, "Corrales")
+
+                CustLabel:
+                    id:check4
+                    text: "Cargadero"
+                    bold:True
+
+                CheckBoxBG:
+                    on_active:root.get_checks(self, self.active, "Cargadero")
+
+                CustLabel:
+                    id:check5
+                    text: "Molinos/Perforaciones"
+                    bold:True
+
+                CheckBoxBG:
+                    on_active:root.get_checks(self, self.active, "Molinos/Perforaciones")
+
+                CustLabel:
+                    id:check6
+                    text: "Forraje Reservado (Rollos)"
+                    bold:True
+
+                CheckBoxBG:
+                    on_active:root.get_checks(self, self.active, "Forraje Reservado (Rollos)")
+
+                CustLabel:
+                    id:check7
+                    text: "Otros.."
+                    bold:True
+
+                CheckBoxBG:
+                    on_active:root.get_checks(self, self.active, "Otros")
+            Label:
+                id:debug
+                text: ""
+                color:"#fffb00"
+                font_size:35
+
+            GridLayout:
+                cols:2
+                spacing:10
+                padding:10
+
+                RoundedButton:
+                    text:"ATRAS"
+                    size_hint:(1, 0.5)
+                    font_size:25
+                    bold:True
+                    on_release:root.volver(app.root)
+
+                RoundedButton:
+                    text:"SIGUIENTE"
+                    on_release:root.siguiente(app.root)
+
+<VentanaPregunta2>:
+    name: "pregunta_dos"
+    debug:debug
+    preg_dos:preg_dos
+    mode: mode
+
+    GridLayout:
+        cols:1
+        size_hint:(0.8, 0.9)
+        pos_hint:{"center_x":0.5, "center_y":0.5}
+        spacing:10
+
+        BoxLayout:
+            orientation:"vertical"
+            padding:10
+
+            Label:
+                id:mode
+                text: ""
+                color:"#ff0000"
+                size_hint:(1, 0.5)
+                font_size:10
+
+            Label:
+                text: "QUESTIONARIO SR"
+                font_size:40
+                size_hint:(1, 0.5)
+                bold:True
+
+            Label:
+                text:"2) ¿Que superficie (Has) de pasturas implantadas tiene?"
+                font_size:30
+                text_size: self.width, None
+                height: self.texture_size[1]
+
+            TextInputwHintSize:
+                id: preg_dos
+                multiline: False
+                font_size:20
+                padding_y:(10, 10)
+                padding_x:(10, 10)
+                size_hint:(1, 0.5)
+                input_filter:'int'
+                hint_text: "Ingrese número de hectareas"
+                hint_text_size:40
+                on_text: app.update_font_size(self)
+                on_size: app.update_font_size(self)
+
+            Label:
+                id:debug
+                text: ""
+                color:"#fffb00"
+                font_size:35
+
+            GridLayout:
+                cols:2
+                spacing:10
+                padding:10
+
+                RoundedButton:
+                    text:"ATRAS"
+                    on_release:root.volver(app.root)
+
+                RoundedButton:
+                    text: "SIGUIENTE"
+                    on_release:root.siguiente(app.root)
+
+
+<VentanaPregunta3>:
+    name: "pregunta_tres"
+    debug:debug
+    preg_tres:preg_tres
+    mode: mode
+
+    GridLayout:
+        cols:1
+        size_hint:(0.8, 0.9)
+        pos_hint:{"center_x":0.5, "center_y":0.5}
+        spacing:10
+
+        BoxLayout:
+            orientation:"vertical"
+            padding:10
+
+            Label:
+                id:mode
+                text: ""
+                color:"#ff0000"
+                size_hint:(1, 0.5)
+                font_size:10
+
+            Label:
+                text: "QUESTIONARIO SR"
+                font_size:40
+                size_hint:(1, 0.5)
+                bold:True
+
+            Label:
+                text:"3) ¿Que problemas de sanidad/reproductivos son más frecuentes?"
+                font_size:30
+                text_size: self.width, None
+                height: self.texture_size[1]
+
+            TextInputwHintSize:
+                id: preg_tres
+                multiline: False
+                font_size:25
+                padding_y:(10, 10)
+                padding_x:(10, 10)
+                size_hint:(1, 0.5)
+                on_text: app.update_font_size(self)
+                on_size: app.update_font_size(self)
+                hint_text:"Ejem: garrapatas, brucelocis, etc.."
+                hint_text_size:40
+
+            Label:
+                id:debug
+                text: ""
+                color:"#fffb00"
+                font_size:35
+
+            GridLayout:
+                cols:2
+                spacing:10
+                padding:10
+
+                RoundedButton:
+                    text:"ATRAS"
+                    on_release:root.volver(app.root)
+
+                RoundedButton:
+                    text: "SIGUIENTE"
+                    on_release:root.siguiente(app.root)
+
+
+<VentanaPregunta4>:
+    name:"pregunta_cuatro"
+    debug:debug
+    mode:mode
+
+    GridLayout:
+        cols:1
+        size_hint:(0.8, 0.9)
+        pos_hint:{"center_x":0.5, "center_y":0.5}
+        spacing:10
+
+        BoxLayout:
+            orientation:"vertical"
+            padding:10
+
+            Label:
+                id:mode
+                text: ""
+                color:"#ff0000"
+                size_hint:(1, 0.5)
+                font_size:10
+
+            Label:
+                text: "QUESTIONARIO SR"
+                font_size:40
+                size_hint:(1, 0.5)
+                bold:True
+
+            Label:
+                text:"4) ¿Tiene acompañamiento técnico frecuente?"
+                font_size:30
+                text_size: self.width, None
+                height: self.texture_size[1]
+
+            GridLayout:
+                cols:2
+                pos_hint:{"center_x":0.5, "center_y":0.5}
+                spacing:10
+
+                CustLabel:
+                    id:check1
+                    text: "Veterinario/Ingeniero particular"
+                    bold:True
+
+                CheckBoxBG:
+                    on_active:root.get_checks(self, self.active, "Veterinario/Ingeniero particular")
+
+                CustLabel:
+                    id:check2
+                    text: "Instituciones (MPyA, INTA, PAIPPA, SAF)"
+                    bold:True
+
+                CheckBoxBG:
+                    on_active:root.get_checks(self, self.active, "Instituciones (MPyA, INTA, PAIPPA, SAF)")
+
+            Label:
+                id:debug
+                text: ""
+                color:"#fffb00"
+                font_size:30
+
+            GridLayout:
+                cols:2
+                spacing:10
+                padding:10
+
+                RoundedButton:
+                    text:"ATRAS"
+                    on_release:root.volver(app.root)
+
+                RoundedButton:
+                    text: "SIGUIENTE"
+                    on_release:root.siguiente(app.root)
+
+<VentanaFinal>:
+    debug:debug
+    name: "final"
+    mode:mode
+    enviar:enviar
+
+    GridLayout:
+        cols:1
+        size_hint:(0.8, 0.9)
+        pos_hint:{"center_x":0.5, "center_y":0.5}
+        spacing:10
+
+        BoxLayout:
+            orientation:"vertical"
+            padding:10
+
+            Label:
+                id:mode
+                text: ""
+                color:"#ff0000"
+                size_hint:(1, 0.5)
+                font_size:30
+
+            Label:
+                text: "QUESTIONARIO SR"
+                font_size:40
+                bold:True
+
+            Image:
+                source:"data/logo-ok.png"
+
+            Label:
+                text: "GRACIAS POR COMPLETAR EL QUESTIONARIO"
+                font_size:30
+
+            Label:
+                id:debug
+                text: ""
+                color:"#fffb00"
+                font_size:35
+
+            Label:
+                text: ""
+                font_size:16
+
+            GridLayout:
+                cols:2
+                spacing:10
+                padding:10
+
+                RoundedButton:
+                    text:"VOLVER"
+                    on_release: root.volver(app.root)
+
+                RoundedButton:
+                    text: "GUARDAR/ENVIAR"
+                    on_release: root.guardar_enviar(app.root)
+
+            GridLayout:
+                cols:1
+                spacing:10
+                padding:10
+
+                RoundedButton:
+                    id:enviar
+                    text: "FINALIZAR"
+                    padding:(20, 20)
+                    disabled:True
+                    on_release: root.terminar(app)
+
+<VentanaFinalAdmin>:
+    name: "final_admin"
+    debug:debug
+    mode:mode
+
+    GridLayout:
+        cols:1
+        size_hint:(0.8, 0.9)
+        pos_hint:{"center_x":0.5, "center_y":0.5}
+        spacing:10
+
+        BoxLayout:
+            orientation:"vertical"
+            padding:10
+
+            Label:
+                id:mode
+                text: ""
+                color:"#ff0000"
+                size_hint:(1, 0.5)
+                font_size:30
+
+            Label:
+                text: "QUESTIONARIO SR"
+                font_size:40
+                bold:True
+
+            Image:
+                source:"data/download-icon.png"
+
+            Label:
+                text: "DESCARGAR DATOS / CONFIG DB"
+                font_size:35
+
+            Label:
+                id:debug
+                markup:True
+                text: ""
+                color:"#fffb00"
+                font_size:35
+
+            GridLayout:
+                cols:2
+                spacing:10
+                padding:10
+
+                RoundedButton:
+                    text:"CONFIG DB"
+                    on_release: root.config_db(app.root)
+
+                RoundedButton:
+                    text: "IMPORTAR CSV"
+                    on_release: root.descargar_csv(app.root)
+
+            GridLayout:
+                cols:1
+                spacing:10
+                padding:10
+
+                RoundedButton:
+                    text: "SALIR"
+                    on_release: root.volver(app.root)
